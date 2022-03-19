@@ -6,7 +6,6 @@ import Repos from '../repos/Repos';
 
 const User = () => {
   const githubContext = useContext(GithubContext);
-  const { loading, getUser, user, repos, getUserRepos } = githubContext;
 
   let params = useParams();
   useEffect(() => {
@@ -14,6 +13,8 @@ const User = () => {
     getUserRepos(params.login);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { loading, getUser, user, repos, getUserRepos } = githubContext;
 
   const {
     name,
