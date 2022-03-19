@@ -8,13 +8,13 @@ const User = () => {
   const githubContext = useContext(GithubContext);
 
   let params = useParams();
+  const { loading, getUser, user, repos, getUserRepos } = githubContext;
+
   useEffect(() => {
     getUser(params.login);
     getUserRepos(params.login);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const { loading, getUser, user, repos, getUserRepos } = githubContext;
 
   const {
     name,
