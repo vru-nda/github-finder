@@ -8,13 +8,19 @@ const User = () => {
   const githubContext = useContext(GithubContext);
 
   let params = useParams();
-  const { loading, getUser, user, repos, getUserRepos } = githubContext;
+
+  const { loading, user, getUser, repos, getUserRepos } = githubContext;
 
   useEffect(() => {
+    console.log('Trigger');
     getUser(params.login);
     getUserRepos(params.login);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading || !user) {
+    return <Spinner />;
+  }
 
   const {
     name,
@@ -31,8 +37,6 @@ const User = () => {
     public_gists,
     hireable,
   } = user;
-
-  if (loading) return <Spinner />;
 
   return (
     <Fragment>
@@ -70,7 +74,7 @@ const User = () => {
             <li>
               {login && (
                 <Fragment>
-                  <strong>Username:</strong> {login}
+                  <strong>me:</strong> {login}
                 </Fragment>
               )}
             </li>
